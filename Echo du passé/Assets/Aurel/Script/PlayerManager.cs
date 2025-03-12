@@ -29,11 +29,11 @@ public class PlayerManager : MonoBehaviour
     {
         string tag = collision.gameObject.tag;
         Debug.Log("Collided with " + tag);
-        /*switch (tag)
+        switch (tag)
         {
-            case "Ennemy": SceneManager.LoadScene("placeholder"); break;
-            case "Gate" : SceneManager.LoadScene("placeholder"); break;
-            case "Interactable_PNJ": SceneManager.LoadScene("placeholder");break;
-        }*/
+            case "Ennemy": //SceneManager.LoadScene("placeholder"); break;
+            case "Gate": //SceneManager.LoadScene("placeholder"); break;
+            case "Interactable_PNJ": //SceneManager.LoadScene("placeholder");break;
+        }
     }
 }
