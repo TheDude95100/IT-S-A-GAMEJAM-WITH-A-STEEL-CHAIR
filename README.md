@@ -10,7 +10,7 @@ Gamejam faites au pif avec des gens cool
 | ${\textsf{\color{red}Ordre d'initiative}}$                     | ${\textsf{\color{red}Spawn enemie important du combat}}$          |
 | ${\textsf{\color{red}Caméra fixe}}$                            | ${\textsf{\color{red}Affichage de l'xp gagné en combat}}$         |
 | ${\textsf{\color{red}adds aléatoire}}$                         | ${\textsf{\color{red}Affichage des stats gagné en combat}}$       |
-| ${\textsf{\color{red}gain d'xp}}$                              | ${\textsf{\color{red}PJN parlable}}$                              |
+| ${\textsf{\color{red}gain d'xp}}$                              | ${\textsf{\color{red}PNJ parlable}}$                              |
 | ${\textsf{\color{red}gain de stat lié a la boucle}}$           | ${\textsf{\color{red}Le poivrot conscient des boucles}}$          |
 | ${\textsf{\color{red}gain de stat permanente (pokedex)}}$      | ${\textsf{\color{red}Journal des activités}}$                     |
 | ${\textsf{\color{red}Triangle de faiblesse}}$                  | ${\textsf{\color{red}Zone pour rejoindre le combat de boss}}$     |
