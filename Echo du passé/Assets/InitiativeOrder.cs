@@ -1,42 +1,32 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using TMPro;
 
 public class InitiativeOrder : MonoBehaviour
 {
-    [SerializeField] private GameObject initiativeEntryPrefab; // Un prefab contenant un Text
-    [SerializeField] private Transform initiativeListContainer; // Le parent contenant la liste des personnages
 
-    private List<GameObject> initiativeEntries = new List<GameObject>();
+    [SerializeField] private int _numberOfCharacters;
+    [SerializeField] private GameObject _characterTextPrefab;
 
     private void Start()
     {
-        UpdateInitiativeUI();
+        CombatManager.Instance.OnInitiativeRolled += CombatManager_OnInitiativeRolled;
     }
-
-    /// <summary>
-    /// Met à jour l'affichage de l'ordre d'initiative.
-    /// </summary>
-    public void UpdateInitiativeUI()
+    private void CombatManager_OnInitiativeRolled(object sender, System.EventArgs e)
     {
-        if (CombatManager.Instance == null) return;
-
-        // Nettoie la liste existante
-        foreach (GameObject entry in initiativeEntries)
+        UpdateVisual();
+    }
+    private void UpdateVisual()
+    {
+        _numberOfCharacters = CombatManager.Instance.CurrentNumberOfCharacters;
+        for (int i = 0; i < _numberOfCharacters; i++)
         {
-            Destroy(entry);
-        }
-        initiativeEntries.Clear();
+            // Instantie le prefab pour chaque personnage
+            GameObject go = Instantiate(_characterTextPrefab, transform.position + Vector3.right * i * 50, Quaternion.identity, transform);
+            go.name = "Character" + i;  // Donne un nom unique à chaque personnage
 
-        // Récupère la pile d'initiative depuis CombatManager
-        Stack<CombatManager.Character> initiativeStack = CombatManager.Instance.GetInitiativeStack();
-
-        // Affiche chaque personnage en UI
-        foreach (CombatManager.Character character in initiativeStack)
-        {
-            GameObject entry = Instantiate(initiativeEntryPrefab, initiativeListContainer);
-            entry.GetComponent<Text>().text = $"{character.Name} (Init: {character.Initiative})";
-            initiativeEntries.Add(entry);
+            go.GetComponent<TextMeshProUGUI>().text = CombatManager.Instance.GetCharacter(i).Name;
         }
     }
 }

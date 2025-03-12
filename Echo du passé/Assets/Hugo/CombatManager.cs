@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 public class CombatManager : MonoBehaviour
@@ -6,6 +7,9 @@ public class CombatManager : MonoBehaviour
     public static CombatManager Instance { get; private set; }
 
     private Stack<Character> initiativeStack = new Stack<Character>();
+    public event EventHandler OnInitiativeRolled;
+
+    public int CurrentNumberOfCharacters => initiativeStack.Count;
 
     private void Awake()
     {
@@ -45,7 +49,7 @@ public class CombatManager : MonoBehaviour
         }
 
         // Trier du plus haut au plus bas
-        characters.Sort((a, b) => b.Initiative.CompareTo(a.Initiative));
+        characters.Sort((a, b) => a.Initiative.CompareTo(b.Initiative));
 
         // Remplir la pile avec l'ordre des initiatives
         initiativeStack.Clear();
@@ -53,6 +57,11 @@ public class CombatManager : MonoBehaviour
         {
             initiativeStack.Push(character);
         }
+    }
+
+    public Character GetCharacter(int initiativeOrder)
+    {
+        return initiativeStack.ToArray()[initiativeOrder];
     }
 
     /// <summary>
@@ -68,6 +77,7 @@ public class CombatManager : MonoBehaviour
             Character chara = tempStack.Pop();
             Debug.Log($"{chara.Name} (Initiative: {chara.Initiative})");
         }
+        OnInitiativeRolled?.Invoke(this, EventArgs.Empty);
 
         NextTurn();
     }
@@ -131,7 +141,7 @@ public class CombatManager : MonoBehaviour
         /// </summary>
         public int RollInitiative()
         {
-            return Random.Range(1, 21); // Dé 20
+            return UnityEngine.Random.Range(1, 21); // Dé 20
         }
     }
 }
