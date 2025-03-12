@@ -8,10 +8,12 @@ public class InitiativeOrder : MonoBehaviour
 
     [SerializeField] private int _numberOfCharacters;
     [SerializeField] private GameObject _characterTextPrefab;
+    [SerializeField] private CombatManager _combatManager;
 
     private void Start()
     {
-        CombatManager.Instance.OnInitiativeRolled += CombatManager_OnInitiativeRolled;
+        _combatManager = FindFirstObjectByType<CombatManager>();
+        _combatManager.OnInitiativeRolled += CombatManager_OnInitiativeRolled;
     }
     private void CombatManager_OnInitiativeRolled(object sender, System.EventArgs e)
     {
@@ -19,14 +21,14 @@ public class InitiativeOrder : MonoBehaviour
     }
     private void UpdateVisual()
     {
-        _numberOfCharacters = CombatManager.Instance.CurrentNumberOfCharacters;
+        _numberOfCharacters = _combatManager.CurrentNumberOfCharacters;
         for (int i = 0; i < _numberOfCharacters; i++)
         {
             // Instantie le prefab pour chaque personnage
-            GameObject go = Instantiate(_characterTextPrefab, transform.position + Vector3.right * i * 50, Quaternion.identity, transform);
+            GameObject go = Instantiate(_characterTextPrefab, transform.position + Vector3.right * i * 25, Quaternion.identity, transform);
             go.name = "Character" + i;  // Donne un nom unique à chaque personnage
 
-            go.GetComponent<TextMeshProUGUI>().text = CombatManager.Instance.GetCharacter(i).Name;
+            go.GetComponent<TextMeshProUGUI>().text = _combatManager.GetCharacter(i).Name;
         }
     }
 }

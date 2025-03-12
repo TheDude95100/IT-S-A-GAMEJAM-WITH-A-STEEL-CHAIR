@@ -4,24 +4,11 @@ using System.Collections.Generic;
 
 public class CombatManager : MonoBehaviour
 {
-    public static CombatManager Instance { get; private set; }
 
     private Stack<Character> initiativeStack = new Stack<Character>();
     public event EventHandler OnInitiativeRolled;
 
     public int CurrentNumberOfCharacters => initiativeStack.Count;
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
 
     private void Start()
     {
