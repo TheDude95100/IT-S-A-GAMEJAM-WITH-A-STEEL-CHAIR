@@ -1,0 +1,94 @@
+{
+    "name": "Control",
+    "maps": [
+        {
+            "name": "Déplacement",
+            "id": "84706ee2-f3d3-42bc-839a-7daae47fb8ee",
+            "actions": [
+                {
+                    "name": "Avancer",
+                    "type": "Button",
+                    "id": "4b174de8-0491-4704-8151-1a1fe37c74f7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Reculer",
+                    "type": "Button",
+                    "id": "3993cbde-3b5e-42dc-bc4e-51ff77d8256f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Droite",
+                    "type": "Button",
+                    "id": "8aa694e7-eb40-49db-91e9-8e4387f05169",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Gauche",
+                    "type": "Button",
+                    "id": "e69ba6f7-6605-4789-956b-e5d8409baa7a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3657b7b1-f38e-41a4-ae93-f1862296909d",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Avancer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "90f3e540-bc73-4a73-b45c-21ecf4c1843c",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reculer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ce755fab-57b8-492a-9cdd-3c278a685b0f",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Droite",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6a21903a-2b43-4c88-b668-97bfc552d0af",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gauche",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
