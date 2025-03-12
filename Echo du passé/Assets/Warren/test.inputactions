@@ -1,0 +1,34 @@
+{
+    "name": "test",
+    "maps": [
+        {
+            "name": "testmap",
+            "id": "7cb344dd-6531-4d5d-9c4a-e1d133f9193c",
+            "actions": [
+                {
+                    "name": "Action",
+                    "type": "Button",
+                    "id": "ba365be7-2077-405d-93ac-f085a162ad1a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3618d744-40ac-47de-9348-4fe5d823ce60",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
