@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     private Animator animator;
     InputAction moveAction;
-    [SerializeField] private Transform _spriteTransform;
+    private Transform _spriteTransform;
     private Camera _mainCamera;
     Vector3 moveDirection;
     int side = 1;
@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         moveAction = InputSystem.actions.FindAction("Move");
+        _spriteTransform = transform.GetChild(0).transform.Find("UnitRoot");
         animator = transform.GetChild(0).transform.Find("UnitRoot").GetComponent<Animator>();
     }
 
@@ -53,6 +54,6 @@ public class PlayerMovement : MonoBehaviour
         {
             side= -1;
         }
-        transform.localScale = new Vector3(side, 1, 1);
+        _spriteTransform.transform.localScale = new Vector3(side, 1, 1);
     }
 }

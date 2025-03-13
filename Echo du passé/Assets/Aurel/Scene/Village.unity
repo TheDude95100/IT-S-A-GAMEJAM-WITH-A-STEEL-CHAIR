@@ -613,8 +613,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 314eb6b5040a07846b8b5c0fa71ff9f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionPrompt: {fileID: 0}
-  promptText: {fileID: 0}
+  interactionPrompt: {fileID: 466380034}
+  promptText: {fileID: 466380033}
   interactionKey: 101
   promptMessage: E
 --- !u!1001 &379642647
