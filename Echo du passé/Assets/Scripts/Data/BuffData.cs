@@ -5,9 +5,12 @@ using UnityEngine;
 public class BuffData : ScriptableObject
 {
     [SerializeField]
-    public string buffName = "...";
+    private string _buffName = "...";
     [SerializeField]
-    public string buffDescription = "...";
+    private string _buffDescription = "...";
+
+    public string BuffName => _buffName;
+    public string BuffDescription => _buffDescription;
 
 
 

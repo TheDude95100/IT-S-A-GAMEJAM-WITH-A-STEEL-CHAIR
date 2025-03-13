@@ -30,6 +30,8 @@ public class EntityData : ScriptableObject
     private int _level = 1;
     [SerializeField] 
     private JobData _job;
+    [SerializeField]
+    private RaceData _raceData;
 
     [SerializeField]
     private Sprite _sprite;
@@ -43,6 +45,8 @@ public class EntityData : ScriptableObject
     public int Vitality => _vitality;
     public int Luck => _luck;
     public JobData Job => _job;
+    public RaceData RaceData => _raceData;
+    public Sprite Sprite => _sprite;
 
     public bool ShowDesignerDisplay => _showDesignerDisplay;
 

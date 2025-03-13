@@ -5,9 +5,12 @@ using UnityEngine;
 public class CurseData : ScriptableObject
 {
     [SerializeField]
-    public string curseName = "...";
+    private string _curseName = "...";
     [SerializeField]
-    public string curseDescription = "...";
+    private string _curseDescription = "...";
+
+    public string CurseName => _curseName;
+    public string CurseDescription => _curseDescription;
 
 
 
