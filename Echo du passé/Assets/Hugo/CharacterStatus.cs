@@ -13,5 +13,9 @@ public class CharacterStatus : MonoBehaviour
     public TextMeshProUGUI CharacterName { get => _characterName; set => _characterName = value; }
     public Slider HpSlider { get => _hpSlider; set => _hpSlider = value; }
     public Slider MpSlider { get => _mpSlider; set => _mpSlider = value; }
-    public CombatManager.Character Character { get => character; set => character = value; }
+    public CombatManager.Character Character { get => character; set { character = value; UpdateCharacterName(); } }
+
+    public void UpdateCharacterName(){
+        CharacterName.text = Character.Name;
+    }
 }

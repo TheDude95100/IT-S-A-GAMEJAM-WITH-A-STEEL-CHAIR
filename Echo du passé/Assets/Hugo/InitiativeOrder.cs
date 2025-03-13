@@ -10,7 +10,7 @@ public class InitiativeOrder : MonoBehaviour
     [SerializeField] private GameObject _characterTextPrefab;
     [SerializeField] private CombatManager _combatManager;
 
-    private void Start()
+    private void Awake()
     {
         _combatManager = FindFirstObjectByType<CombatManager>();
         _combatManager.OnInitiativeRolled += CombatManager_OnInitiativeRolled;

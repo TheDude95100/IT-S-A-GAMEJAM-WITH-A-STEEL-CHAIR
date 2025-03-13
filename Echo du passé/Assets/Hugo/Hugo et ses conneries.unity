@@ -1063,6 +1063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterStatusPrefab: {fileID: 5578628587788035418, guid: b86d68b182c629c4391e135519f817ec, type: 3}
+  _combatManager: {fileID: 0}
 --- !u!222 &1184218716
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1985,8 +1986,8 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 709031411}
   - {fileID: 992185237}
   - {fileID: 1700096156}
   - {fileID: 1030054945}
   - {fileID: 1856340814}
+  - {fileID: 709031411}
