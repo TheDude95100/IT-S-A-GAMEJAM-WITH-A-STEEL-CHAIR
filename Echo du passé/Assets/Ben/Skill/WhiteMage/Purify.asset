@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b322b60af84cf42b9348390292a119, type: 3}
+  m_Name: Purify
+  m_EditorClassIdentifier: 
+  skillName: 'Purify '
+  _skillSlot: 0
+  description: Removes all negative effects from an ally
+  _element: 0
+  _focus: 2
+  _damage: 0
+  _accuracy: 10
+  _curses: []
+  _healing: 0
+  _buffs:
+  - {fileID: 11400000, guid: 9da9e017521fea94882405f0ae7df45f, type: 2}

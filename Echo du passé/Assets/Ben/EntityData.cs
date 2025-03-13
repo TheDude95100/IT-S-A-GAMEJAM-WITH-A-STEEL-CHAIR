@@ -3,10 +3,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EntityData_", menuName = "Scriptable Objects/Entity")]
 public class EntityData : ScriptableObject
 {
+    // Editor param
+    [SerializeField]
+    private bool _showDesignerDisplay = false;
+
     [SerializeField] 
     private string _entityName = "...";
-
-    [Header("General stats")]
 
     [SerializeField]
     [Range(1, 10)]
@@ -24,14 +26,10 @@ public class EntityData : ScriptableObject
     [Range(1, 10)]
     private int _luck = 1;
 
-    [Header("Job stats")]
-
     [SerializeField][Range(1,10)]
     private int _level = 1;
     [SerializeField] 
     private JobData _job;
-
-    [Header("Sprite")]
 
     [SerializeField]
     private Sprite _sprite;
@@ -45,5 +43,7 @@ public class EntityData : ScriptableObject
     public int Vitality => _vitality;
     public int Luck => _luck;
     public JobData Job => _job;
+
+    public bool ShowDesignerDisplay => _showDesignerDisplay;
 
 }
