@@ -1,8 +1,8 @@
 ﻿using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "JobData", menuName = "Dataset/Job")]
-public class JobData : ScriptableObject
+[System.Serializable]
+public class JobData
 {
     [SerializeField]
     private string _jobName = "...";
