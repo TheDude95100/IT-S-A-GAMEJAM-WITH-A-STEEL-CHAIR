@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BuffData", menuName = "Scriptable Objects/Buff")]
+[CreateAssetMenu(fileName = "BuffData", menuName = "Dataset/Buff")]
 public class BuffData : ScriptableObject
 {
     [SerializeField]
