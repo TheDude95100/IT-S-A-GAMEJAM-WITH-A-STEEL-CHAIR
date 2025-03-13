@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     InputAction moveAction;
     public float Speed = 5f;
@@ -25,21 +25,24 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collider)
     {
-        string tag = collision.gameObject.tag;
-        Debug.Log("Collided with " + tag);
-        switch (tag)
+
+        string tag = collider.gameObject.tag;
+        /*switch (tag)
         {
-            case "Ennemy": //SceneManager.LoadScene("placeholder");
-                           break;
+            case "Ennemy": //SceneManager.LoadScene("placeholder"); 
+                Debug.Log("enter" + tag);           
+                break;
             case "Gate": //SceneManager.LoadScene("placeholder");
-                         break;
+                Debug.Log("enter" + tag);
+                break;
             case "Interactable_PNJ": //SceneManager.LoadScene("placeholder");
-                                     break;
+                Debug.Log("enter" + tag);
+                break;
             case "Boss_Gate": //SceneManager.LoadScene("placeholder");
                 Debug.Log("Boss Gate");
                 break;
-        }
+        }*/
     }
 }
