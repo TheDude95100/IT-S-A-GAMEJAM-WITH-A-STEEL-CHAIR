@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class bar : InteractionSystem
+public class Bar : InteractionSystem
 {
     protected override void Interact()
     {
