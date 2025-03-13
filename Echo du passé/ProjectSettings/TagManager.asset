@@ -9,6 +9,7 @@ TagManager:
   - PNJ
   - Gate
   - Boss_Gate
+  - Bar
   layers:
   - Default
   - TransparentFX

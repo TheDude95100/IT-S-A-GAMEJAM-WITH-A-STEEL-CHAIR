@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &280656909 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 173569230026770610, guid: 5118895f805a99040816590b5c470112, type: 3}
-  m_PrefabInstance: {fileID: 2686155365269751715}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &328413962
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,7 +212,6 @@ GameObject:
   - component: {fileID: 477688063}
   - component: {fileID: 477688067}
   - component: {fileID: 477688068}
-  - component: {fileID: 477688069}
   m_Layer: 0
   m_Name: Porte
   m_TagString: Gate
@@ -362,22 +356,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5, y: 5, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &477688069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 477688062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4903a9e87dd9f2b439881f8b73d6dc6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionPrompt: {fileID: 280656909}
-  promptText: {fileID: 1824412187}
-  interactionKey: 101
-  promptMessage: E
 --- !u!1 &849275593
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,7 +584,6 @@ GameObject:
   - component: {fileID: 1596488379}
   - component: {fileID: 1596488383}
   - component: {fileID: 1596488384}
-  - component: {fileID: 1596488385}
   m_Layer: 0
   m_Name: PNJ
   m_TagString: Interactable_PNJ
@@ -753,33 +730,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5, y: 5, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1596488385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1596488378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4903a9e87dd9f2b439881f8b73d6dc6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionPrompt: {fileID: 280656909}
-  promptText: {fileID: 1824412187}
-  interactionKey: 101
-  promptMessage: E
---- !u!114 &1824412187 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6393891791243964962, guid: 5118895f805a99040816590b5c470112, type: 3}
-  m_PrefabInstance: {fileID: 2686155365269751715}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2136328307
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,7 +744,6 @@ GameObject:
   - component: {fileID: 2136328308}
   - component: {fileID: 2136328312}
   - component: {fileID: 2136328313}
-  - component: {fileID: 2136328314}
   m_Layer: 0
   m_Name: Ennemie
   m_TagString: Ennemy
@@ -939,22 +888,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5, y: 5, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2136328314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2136328307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4903a9e87dd9f2b439881f8b73d6dc6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionPrompt: {fileID: 280656909}
-  promptText: {fileID: 1824412187}
-  interactionKey: 101
-  promptMessage: E
 --- !u!1001 &2686155365269751715
 PrefabInstance:
   m_ObjectHideFlags: 0

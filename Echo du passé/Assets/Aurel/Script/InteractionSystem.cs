@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement; // Add TextMeshPro namespace
 
-public class InteractionSystem : MonoBehaviour
+public abstract class InteractionSystem : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private GameObject interactionPrompt;
@@ -14,9 +14,9 @@ public class InteractionSystem : MonoBehaviour
     [SerializeField] private KeyCode interactionKey = KeyCode.E;
     [SerializeField] private string promptMessage = "E";
 
-    private bool canInteract = false;
+    protected bool canInteract = false;
 
-    private void Start()
+    protected void Start()
     {
         // Make sure the prompt is hidden at start
         if (interactionPrompt != null)
@@ -31,7 +31,7 @@ public class InteractionSystem : MonoBehaviour
         }
     }
 
-    private void Update()
+    protected void Update()
     {
         // Check if player can interact and is pressing the interaction key
         if (canInteract && Input.GetKeyDown(interactionKey))
@@ -40,7 +40,7 @@ public class InteractionSystem : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         // Check if the object entering the trigger is the player
         if (other.CompareTag("Player"))
@@ -54,7 +54,7 @@ public class InteractionSystem : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected void OnTriggerExit(Collider other)
     {
         // Check if the object exiting the trigger is the player
         if (other.CompareTag("Player"))
@@ -68,15 +68,6 @@ public class InteractionSystem : MonoBehaviour
         }
     }
 
-    private void Interact()
-    {
-        // This method is called when the player presses the interaction key
-        Debug.Log("Player interacted with " + gameObject.name);
-        switch (gameObject.tag)
-        {
-            case "Gate": SceneManager.LoadScene("Village"); break;
-        }
+    protected abstract void Interact();
 
-        // You can add additional interaction logic here
-    }
 }
