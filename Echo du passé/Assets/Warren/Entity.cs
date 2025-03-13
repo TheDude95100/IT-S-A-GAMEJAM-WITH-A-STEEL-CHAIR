@@ -11,7 +11,13 @@ namespace Combat
         private int damage = 0;
 
         [SerializeField]
-        private Vector3 attackPosition;
+        private Transform standbyPosition;
+
+        [SerializeField]
+        private Transform attackPosition;
+
+        public int HitPoints => hitPoints;
+        public bool IsAlive { get { return hitPoints > 0; } }
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -22,7 +28,6 @@ namespace Combat
         // Update is called once per frame
         void Update()
         {
-
         }
 
         /// <summary>
