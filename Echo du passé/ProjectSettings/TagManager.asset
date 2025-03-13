@@ -8,6 +8,7 @@ TagManager:
   - Interactable_PNJ
   - PNJ
   - Gate
+  - Boss_Gate
   layers:
   - Default
   - TransparentFX

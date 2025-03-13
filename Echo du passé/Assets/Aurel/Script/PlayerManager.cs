@@ -37,6 +37,9 @@ public class PlayerManager : MonoBehaviour
                          break;
             case "Interactable_PNJ": //SceneManager.LoadScene("placeholder");
                                      break;
+            case "Boss_Gate": //SceneManager.LoadScene("placeholder");
+                Debug.Log("Boss Gate");
+                break;
         }
     }
 }
