@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CurseData", menuName = "Scriptable Objects/Curse")]
+[CreateAssetMenu(fileName = "CurseData", menuName = "Dataset/Curse")]
 public class CurseData : ScriptableObject
 {
     [SerializeField]

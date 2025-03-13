@@ -494,6 +494,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4186346816957955630, guid: cb63ce72f9c7e8f4499aebaaf040cd50, type: 3}
+      propertyPath: allyPrefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186346816957955630, guid: cb63ce72f9c7e8f4499aebaaf040cd50, type: 3}
+      propertyPath: enemyPrefab
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7888443679978084627, guid: cb63ce72f9c7e8f4499aebaaf040cd50, type: 3}
       propertyPath: m_Name
       value: Combat manager

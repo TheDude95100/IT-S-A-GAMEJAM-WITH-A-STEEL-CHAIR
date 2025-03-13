@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EntityData_", menuName = "Scriptable Objects/Entity")]
+[CreateAssetMenu(fileName = "EntityData_", menuName = "Dataset/Entity")]
 public class EntityData : ScriptableObject
 {
     // Editor param

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RaceData", menuName = "Scriptable Objects/RaceData")]
+[CreateAssetMenu(fileName = "RaceData", menuName = "Dataset/Race")]
 public class RaceData : ScriptableObject
 {
     [SerializeField]
