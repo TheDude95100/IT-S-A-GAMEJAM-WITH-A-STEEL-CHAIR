@@ -34,6 +34,7 @@ public class PlayerObj : MonoBehaviour
         IndexPair[state] = index;
     }
     public void PlayStateAnimation(PlayerState state){
+        Debug.Log(state.ToString());
         _prefabs.PlayAnimation(state, IndexPair[state]);
     }
     void Update()
