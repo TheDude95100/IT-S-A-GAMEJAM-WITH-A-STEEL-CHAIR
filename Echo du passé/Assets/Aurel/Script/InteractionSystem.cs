@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro; // Add TextMeshPro namespace
+using TMPro;
+using UnityEngine.SceneManagement; // Add TextMeshPro namespace
 
 public class InteractionSystem : MonoBehaviour
 {
@@ -71,6 +72,10 @@ public class InteractionSystem : MonoBehaviour
     {
         // This method is called when the player presses the interaction key
         Debug.Log("Player interacted with " + gameObject.name);
+        switch (gameObject.tag)
+        {
+            case "Gate": SceneManager.LoadScene("Village"); break;
+        }
 
         // You can add additional interaction logic here
     }
