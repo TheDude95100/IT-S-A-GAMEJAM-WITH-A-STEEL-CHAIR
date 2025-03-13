@@ -38,7 +38,7 @@ public class EntityDataEditor : Editor
         serializedObject.UpdateIfRequiredOrScript();
 
         // Cast param
-        JobData _jobData = (JobData)_job.objectReferenceValue;
+        //JobData _jobData = (JobData)_job.objectReferenceValue;
 
         // Entity name at the begin
         EditorGUILayout.LabelField(_entityName.stringValue.ToUpper(), EditorStyles.boldLabel);
@@ -50,7 +50,7 @@ public class EntityDataEditor : Editor
 
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField(_entityName.stringValue, EditorStyles.boldLabel, GUILayout.ExpandWidth(false));
-        EditorGUILayout.LabelField(_jobData.JobName, GUILayout.ExpandWidth(false));
+        //EditorGUILayout.LabelField(_jobData.JobName, GUILayout.ExpandWidth(false));
         EditorGUILayout.EndHorizontal();
         ProgressBar((_strength.intValue + _dexterity.intValue + _intelligence.intValue + _vitality.intValue + _luck.intValue) / 50f, "Difficulty");
         
