@@ -3,6 +3,7 @@ using UnityEngine;
 
 public abstract class Entity : MonoBehaviour
 {
+    #region Variables
     [SerializeField]
     protected EntityData _entityData;
     [SerializeField]
@@ -33,9 +34,20 @@ public abstract class Entity : MonoBehaviour
     protected float _magicDefense;
 
     protected Dice _d20;
+    #endregion
 
-
-    public string EntityName => _entityName;
+    #region Properties
+    public string EntityName
+    {
+        get
+        {
+            return _entityName;
+        }
+        set
+        {
+            _entityName = value;
+        }
+    }
 
     public Sprite Sprite => _sprite;
 
@@ -61,10 +73,17 @@ public abstract class Entity : MonoBehaviour
     public float MagicDefense => _magicDefense;
 
     public bool IsAlive { get { return _currentHP > 0; } }
+    #endregion
 
     protected void Awake()
     {
         _d20 = new Dice(Dice.DiceType.D20);
+
+        _entityName = _entityData.Name;
+
+        UpdateStats();
+
+        _currentHP = _maxHP;
     }
 
     /// <summary>
@@ -94,8 +113,8 @@ public abstract class Entity : MonoBehaviour
     /// <summary>
     /// Roll a dice to determine the initiative.
     /// </summary>
-    public int RollInitiative()
+    public void RollInitiative()
     {
-        return _d20.ThrowDice();
+        _initiative = _d20.ThrowDice();
     }
 }

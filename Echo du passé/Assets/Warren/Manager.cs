@@ -33,10 +33,11 @@ namespace Combat
 
         private int _selected;
 
-        private Stack<Character> initiativeStack = new Stack<Character>();
+        private Stack<Entity> initiativeStack = new Stack<Entity>();
         public event EventHandler OnInitiativeRolled;
 
-        public int CurrentNumberOfCharacters => initiativeStack.Count;
+        public int NumberOfCharactersInBattle => _entityList.Count;
+        public int NumberOfAllyInBattle => _allyIndexes.Count;
 
         private void Awake()
         {
@@ -52,8 +53,8 @@ namespace Combat
                     break;
                 }
                 GameObject entity = Instantiate(allyPrefab, allyPositions[i]);
+                entity.name = "Player" + i;
                 _entityList.Add(entity.GetComponent<Entity>());
-                _allyIndexes.Add(i);
             }
 
             for (int i = 0; i < nbEnemy; i++)
@@ -63,22 +64,14 @@ namespace Combat
                     break;
                 }
                 GameObject entity = Instantiate(enemyPrefab, enemyPositions[i]);
+                entity.name = "Enemy" + i;
                 _entityList.Add(entity.GetComponent<Entity>());
-                _enemyIndexes.Add(i + nbAlly);
             }
         }
 
         private void Start()
         {
-            List<Character> combattants = new List<Character>
-        {
-            new Character("Guerrier"),
-            new Character("Mage"),
-            new Character("Voleur"),
-            new Character("Orc")
-        };
-
-            InitializeInitiative(combattants);
+            InitializeInitiative(_entityList);
             StartCombat();
         }
 
@@ -95,14 +88,34 @@ namespace Combat
         }
 
         /// <summary>
+        /// Update the indexes to know where the allies and the ennemies are in the list.
+        /// </summary>
+        private void UpdateEntitiesIndexes()
+        {
+            for (int counter = 0; counter < _entityList.Count; counter++)
+            {
+                Debug.Log(_entityList[counter].gameObject.name);
+
+                if (_entityList[counter].CompareTag("Player"))
+                {
+                    _allyIndexes.Add(counter);
+                }
+                else
+                {
+                    _enemyIndexes.Add(counter);
+                }
+            }
+        }
+
+        /// <summary>
         /// Initialise l'ordre d'initiative et remplit la pile.
         /// </summary>
-        public void InitializeInitiative(List<Character> characters)
+        public void InitializeInitiative(List<Entity> characters)
         {
             // Attribuer une initiative aléatoire à chaque personnage
             foreach (var character in characters)
             {
-                character.Initiative = character.RollInitiative();
+                character.RollInitiative();
             }
 
             // Trier du plus haut au plus bas
@@ -114,11 +127,19 @@ namespace Combat
             {
                 initiativeStack.Push(character);
             }
+            UpdateEntitiesIndexes();
         }
 
-        public Character GetCharacter(int initiativeOrder)
+        //retourne de la liste complete
+        public Entity GetCharacter(int initiativeOrder)
         {
             return initiativeStack.ToArray()[initiativeOrder];
+        }
+
+        //retourne des allié uniquement
+        public Entity GetAlly(int listIndex)
+        {
+            return _entityList[_allyIndexes[listIndex]];
         }
 
         /// <summary>
@@ -128,11 +149,11 @@ namespace Combat
         {
             Debug.Log("Début du combat ! Ordre d'initiative :");
 
-            Stack<Character> tempStack = new Stack<Character>(initiativeStack);
+            Stack<Entity> tempStack = new Stack<Entity>(initiativeStack);
             while (tempStack.Count > 0)
             {
-                Character chara = tempStack.Pop();
-                Debug.Log($"{chara.Name} (Initiative: {chara.Initiative})");
+                Entity chara = tempStack.Pop();
+                Debug.Log($"{chara.EntityName} (Initiative: {chara.Initiative})");
             }
             OnInitiativeRolled?.Invoke(this, EventArgs.Empty);
 
@@ -150,8 +171,8 @@ namespace Combat
                 ResetInitiative();
             }
 
-            Character currentCharacter = initiativeStack.Pop();
-            Debug.Log($"{currentCharacter.Name} joue son tour !");
+            Entity currentCharacter = initiativeStack.Pop();
+            Debug.Log($"{currentCharacter.EntityName} joue son tour !");
         }
 
         /// <summary>
@@ -160,22 +181,22 @@ namespace Combat
         private void ResetInitiative()
         {
             // Transformer la pile en liste temporaire et réinitialiser
-            List<Character> tempList = new List<Character>(initiativeStack);
+            List<Entity> tempList = new List<Entity>(initiativeStack);
             InitializeInitiative(tempList);
         }
 
         /// <summary>
         /// Ajoute un nouveau combattant au combat.
         /// </summary>
-        public void AddCharacterToInitiative(Character newCharacter)
+        public void AddCharacterToInitiative(Entity newCharacter)
         {
-            newCharacter.Initiative = newCharacter.RollInitiative();
+            newCharacter.RollInitiative();
 
-            List<Character> tempList = new List<Character>(initiativeStack) { newCharacter };
+            List<Entity> tempList = new List<Entity>(initiativeStack) { newCharacter };
             InitializeInitiative(tempList);
         }
 
-        public Stack<Character> GetInitiativeStack()
+        public Stack<Entity> GetInitiativeStack()
         {
             return initiativeStack;
         }
@@ -222,28 +243,6 @@ namespace Combat
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// Classe des combattants.
-        /// </summary>
-        public class Character
-        {
-            public string Name { get; private set; }
-            public int Initiative { get; set; }
-
-            public Character(string name)
-            {
-                Name = name;
-            }
-
-            /// <summary>
-            /// Jette un dé pour déterminer l'initiative.
-            /// </summary>
-            public int RollInitiative()
-            {
-                return UnityEngine.Random.Range(1, 21); // Dé 20
-            }
         }
     }
 }

@@ -592,6 +592,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4186346816957955630, guid: cb63ce72f9c7e8f4499aebaaf040cd50, type: 3}
+      propertyPath: nbAlly
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186346816957955630, guid: cb63ce72f9c7e8f4499aebaaf040cd50, type: 3}
+      propertyPath: nbEnemy
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186346816957955630, guid: cb63ce72f9c7e8f4499aebaaf040cd50, type: 3}
       propertyPath: allyPrefab
       value: 
       objectReference: {fileID: 6869941967591857442, guid: b496220dbeaede24aa938b32ea93f29b, type: 3}
