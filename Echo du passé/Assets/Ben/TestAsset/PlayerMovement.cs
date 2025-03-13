@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
         moveAction = InputSystem.actions.FindAction("Move");
         _spriteTransform = transform.GetChild(0).transform.Find("UnitRoot");
         animator = transform.GetChild(0).transform.Find("UnitRoot").GetComponent<Animator>();
+        _mainCamera = Camera.main;
     }
 
     private void Update()
@@ -41,6 +42,10 @@ public class PlayerMovement : MonoBehaviour
         if (_spriteTransform != null && _mainCamera != null)
         {
             _spriteTransform.forward = _mainCamera.transform.forward;
+        }
+        else
+        {
+            Debug.Log(_mainCamera != null);
         }
     }
 
