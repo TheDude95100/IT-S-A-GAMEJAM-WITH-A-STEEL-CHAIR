@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ccd01e713d4ecb4458083f55c2485223, type: 3}
-  m_Name: Human
+  m_Name: Orc
   m_EditorClassIdentifier: 
-  _raceName: Human
+  _raceName: Orc
   _raceDescription: ...
-  _raceStrength: 1
-  _raceDexterity: 2
+  _raceStrength: 2
+  _raceDexterity: 1
   _raceIntelligence: 1
-  _raceVitality: 1
-  _raceLuck: 2
+  _raceVitality: 2
+  _raceLuck: 1

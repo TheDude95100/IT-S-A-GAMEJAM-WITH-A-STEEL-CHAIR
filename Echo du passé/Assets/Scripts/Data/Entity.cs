@@ -5,15 +5,18 @@ public abstract class Entity : MonoBehaviour
 {
     [SerializeField]
     protected EntityData _entityData;
+    [SerializeField]
+    protected RaceData _raceData;
 
     protected string _entityName = "...";
 
     protected Sprite _sprite;
 
     protected JobData _job;
-    protected RaceData _raceData;
 
     protected int _level;
+
+    protected int _initiative;
 
     protected int _strength;
     protected int _dexterity;
@@ -29,7 +32,40 @@ public abstract class Entity : MonoBehaviour
     protected float _magicAttack;
     protected float _magicDefense;
 
+    protected Dice _d20;
+
+
+    public string EntityName => _entityName;
+
+    public Sprite Sprite => _sprite;
+
+    public JobData Job => _job;
+    public RaceData RaceData => _raceData;
+
+    public int Level => _level;
+
+    public int Initiative => _initiative;
+
+    public int Strength => _strength;
+    public int Dexterity => _dexterity;
+    public int Intelligence => _intelligence;
+    public int Vitality => _vitality;
+    public int Luck => _luck;
+
+    public float CurrentHP => _currentHP;
+    public float MaxHP => _maxHP;
+
+    public float Attack => _attack;
+    public float Defense => _defense;
+    public float MagicAttack => _magicAttack;
+    public float MagicDefense => _magicDefense;
+
     public bool IsAlive { get { return _currentHP > 0; } }
+
+    protected void Awake()
+    {
+        _d20 = new Dice(Dice.DiceType.D20);
+    }
 
     /// <summary>
     /// Function to update the entity stats upon change.
@@ -53,5 +89,13 @@ public abstract class Entity : MonoBehaviour
     {
         _currentHP -= amount;
         Debug.Log(gameObject.name + " has " + _currentHP + " left.");
+    }
+
+    /// <summary>
+    /// Roll a dice to determine the initiative.
+    /// </summary>
+    public int RollInitiative()
+    {
+        return _d20.ThrowDice();
     }
 }
