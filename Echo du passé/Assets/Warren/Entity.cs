@@ -10,12 +10,6 @@ namespace Combat
         [SerializeField]
         private int damage = 0;
 
-        [SerializeField]
-        private Transform standbyPosition;
-
-        [SerializeField]
-        private Transform attackPosition;
-
         public int HitPoints => hitPoints;
         public bool IsAlive { get { return hitPoints > 0; } }
 
