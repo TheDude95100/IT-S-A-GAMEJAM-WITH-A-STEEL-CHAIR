@@ -73,6 +73,9 @@ public class EntityDataEditor : Editor
             {
                 EditorGUILayout.HelpBox("Caution: No race specified. Please specify the race of the entity", MessageType.Warning);
             }
+
+            EditorGUILayout.PropertyField(_level, new GUIContent("Level"));
+            EditorGUILayout.Space(10);
             EditorGUILayout.PropertyField(_job, new GUIContent("Job"));
 
             // Stats glider
