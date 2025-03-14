@@ -37,6 +37,9 @@ public class CombatManager : MonoBehaviour
     public int NumberOfCharactersInBattle => _entityList.Count;
     public int NumberOfAllyInBattle => _allyIndexes.Count;
 
+    public delegate void UpdateHealthUI(Entity target);
+    public event UpdateHealthUI onPlayerDamageTaken;
+
     private void Awake()
     {
         Debug.Log("Awake");
