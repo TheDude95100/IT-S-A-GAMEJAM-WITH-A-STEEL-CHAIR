@@ -21,14 +21,14 @@ public class InitiativeOrder : MonoBehaviour
     }
     private void UpdateVisual()
     {
-        _numberOfCharacters = _combatManager.CurrentNumberOfCharacters;
+        _numberOfCharacters = _combatManager.NumberOfCharactersInBattle;
         for (int i = 0; i < _numberOfCharacters; i++)
         {
             // Instantie le prefab pour chaque personnage
             GameObject go = Instantiate(_characterTextPrefab, transform.position + Vector3.right * i * 25, Quaternion.identity, transform);
             go.name = "Character" + i;  // Donne un nom unique à chaque personnage
 
-            go.GetComponent<TextMeshProUGUI>().text = _combatManager.GetCharacter(i).Name;
+            go.GetComponent<TextMeshProUGUI>().text = _combatManager.GetCharacter(i).EntityName;
         }
     }
 }

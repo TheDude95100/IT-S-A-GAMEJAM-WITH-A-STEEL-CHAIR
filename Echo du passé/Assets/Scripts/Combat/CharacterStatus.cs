@@ -4,7 +4,7 @@ using TMPro;
 
 public class CharacterStatus : MonoBehaviour
 {
-    [SerializeField] CombatManager.Character character;
+    [SerializeField] Entity character;
     [SerializeField] TextMeshProUGUI _hpValue, _mpValue, _characterName;
     [SerializeField] Slider _hpSlider, _mpSlider;
 
@@ -13,9 +13,9 @@ public class CharacterStatus : MonoBehaviour
     public TextMeshProUGUI CharacterName { get => _characterName; set => _characterName = value; }
     public Slider HpSlider { get => _hpSlider; set => _hpSlider = value; }
     public Slider MpSlider { get => _mpSlider; set => _mpSlider = value; }
-    public CombatManager.Character Character { get => character; set { character = value; UpdateCharacterName(); } }
+    public Entity Character { get => character; set { character = value; UpdateCharacterName(); } }
 
     public void UpdateCharacterName(){
-        CharacterName.text = Character.Name;
+        CharacterName.text = Character.EntityName;
     }
 }

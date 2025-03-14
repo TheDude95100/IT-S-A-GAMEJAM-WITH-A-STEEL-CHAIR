@@ -24,7 +24,7 @@ public class PlayerStatus : MonoBehaviour
     private void CreateVisual()
     {
         Debug.Log("Bite");
-        _numberOfCharacters = _combatManager.CurrentNumberOfCharacters;
+        _numberOfCharacters = _combatManager.NumberOfAllyInBattle;
         for (int i = 0; i < _numberOfCharacters; i++)
         {
             Debug.Log("CONNAAAAARD");
@@ -33,7 +33,7 @@ public class PlayerStatus : MonoBehaviour
             go.transform.localPosition = new Vector3(_X_position, _Y_position + i * _Y_spacing, 0);
             go.name = "Character" + i;  // Donne un nom unique à chaque personnage
             CharacterStatus displayedStatsHolder = go.GetComponent<CharacterStatus>();
-            displayedStatsHolder.Character = _combatManager.GetCharacter(i);
+            displayedStatsHolder.Character = _combatManager.GetAlly(i);
         }
     }
 }
