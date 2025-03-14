@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 
 public class CombatManager : MonoBehaviour
 {
@@ -24,12 +25,16 @@ public class CombatManager : MonoBehaviour
     [SerializeField]
     private Transform enemyActionExecutionPosition;
 
+    [SerializeField]
+    private GameObject actionChoiceHUD;
+
     private List<Entity> _entityList;
 
     private List<int> _enemyIndexes,
                       _allyIndexes;
 
-    private int _selected;
+    private int _selected, 
+                _xpGained;
 
     private Stack<Entity> initiativeStack = new Stack<Entity>();
     public event EventHandler OnInitiativeRolled;
@@ -49,31 +54,11 @@ public class CombatManager : MonoBehaviour
     private void Awake()
     {
         Debug.Log("Awake");
-        _enemyIndexes = new List<int>();
-        _allyIndexes = new List<int>();
         _entityList = new List<Entity>();
 
-        for (int i = 0; i < nbAlly; i++)
-        {
-            if (i >= allyPositions.Length)
-            {
-                break;
-            }
-            GameObject entity = Instantiate(allyPrefab, allyPositions[i]);
-            entity.name = "Player" + i;
-            _entityList.Add(entity.GetComponent<Entity>());
-        }
+        SpawnEntities(nbAlly, allyPrefab, allyPositions);
+        SpawnEntities(nbEnemy, enemyPrefab, enemyPositions);
 
-        for (int i = 0; i < nbEnemy; i++)
-        {
-            if (i >= enemyPositions.Length)
-            {
-                break;
-            }
-            GameObject entity = Instantiate(enemyPrefab, enemyPositions[i]);
-            entity.name = "Enemy" + i;
-            _entityList.Add(entity.GetComponent<Entity>());
-        }
     }
 
     private void Start()
@@ -82,35 +67,46 @@ public class CombatManager : MonoBehaviour
         StartCombat();
     }
 
-    private void FixedUpdate()
+    //retourne de la liste complete
+    public Entity GetCharacter(int initiativeOrder)
     {
-        /*if (VerifyWin())
+        return initiativeStack.ToArray()[initiativeOrder];
+    }
+
+    //retourne des allié uniquement
+    public Entity GetAlly(int listIndex)
+    {
+        return _entityList[_allyIndexes[listIndex]];
+    }
+
+    private bool IsCombatDone()
+    {
+        if (VerifyWin())
         {
             Debug.Log("You win");
+            return true;
         }
+
         if (VerifyLose())
         {
             Debug.Log("You lost");
-        }*/
+            return true;
+        }
+
+        return false;
     }
 
-    /// <summary>
-    /// Update the indexes to know where the allies and the ennemies are in the list.
-    /// </summary>
-    private void UpdateEntitiesIndexes()
+    private void SpawnEntities(int numberToSpawn, GameObject prefab, Transform[] positionList)
     {
-        for (int counter = 0; counter < _entityList.Count; counter++)
+        for (int i = 0; i < numberToSpawn; i++)
         {
-            Debug.Log(_entityList[counter].gameObject.name);
-
-            if (_entityList[counter].CompareTag("Player"))
+            if (i >= positionList.Length)
             {
-                _allyIndexes.Add(counter);
+                break;
             }
-            else
-            {
-                _enemyIndexes.Add(counter);
-            }
+            GameObject entity = Instantiate(prefab, positionList[i]);
+            entity.name = entity.tag + i;
+            _entityList.Add(entity.GetComponent<Entity>());
         }
     }
 
@@ -137,16 +133,26 @@ public class CombatManager : MonoBehaviour
         UpdateEntitiesIndexes();
     }
 
-    //retourne de la liste complete
-    public Entity GetCharacter(int initiativeOrder)
+    /// <summary>
+    /// Update the indexes to know where the allies and the ennemies are in the list.
+    /// </summary>
+    private void UpdateEntitiesIndexes()
     {
-        return initiativeStack.ToArray()[initiativeOrder];
-    }
+        _enemyIndexes = new List<int>();
+        _allyIndexes = new List<int>();
+        for (int counter = 0; counter < _entityList.Count; counter++)
+        {
+            Debug.Log(_entityList[counter].gameObject.name);
 
-    //retourne des allié uniquement
-    public Entity GetAlly(int listIndex)
-    {
-        return _entityList[_allyIndexes[listIndex]];
+            if (_entityList[counter].CompareTag("Player"))
+            {
+                _allyIndexes.Add(counter);
+            }
+            else
+            {
+                _enemyIndexes.Add(counter);
+            }
+        }
     }
 
     /// <summary>
@@ -164,13 +170,60 @@ public class CombatManager : MonoBehaviour
         }
         OnInitiativeRolled?.Invoke(this, EventArgs.Empty);
 
-        NextTurn();
+        StartCoroutine(CombatLoop());
+    }
+
+    IEnumerator CombatLoop()
+    {
+        bool combatFinished = false;
+        Entity activeEntity;
+
+        while(!combatFinished)
+        {
+            activeEntity = NextTurn();
+
+            Debug.Log(activeEntity);
+            Transform activeEntityStartPosition = activeEntity.transform.parent;
+
+            //entity avance a son ini
+            if(activeEntity.CompareTag("Player"))
+            {
+                OnEntityMovementGo?.Invoke(activeEntity, activeEntityStartPosition, allyActionExecutionPosition);
+                Debug.Log(activeEntity + " a bougé.");
+
+
+                yield return new WaitForSeconds(2);
+                OnEntityMovementReturn?.Invoke(activeEntity, allyActionExecutionPosition, activeEntityStartPosition);
+                Debug.Log(activeEntity + " est revenu.");
+            }
+            else
+            {
+                OnEntityMovementGo?.Invoke(activeEntity, activeEntityStartPosition, enemyActionExecutionPosition);
+                Debug.Log(activeEntity + " a bougé.");
+
+                yield return new WaitForSeconds(2);
+                OnEntityMovementReturn?.Invoke(activeEntity, enemyActionExecutionPosition, activeEntityStartPosition);
+                Debug.Log(activeEntity + " est revenu.");
+            }
+
+            yield return new WaitForSeconds(3);
+            combatFinished = IsCombatDone();
+        }
+        //si ally
+        //  afficher bouton
+        //sinon
+        //  enemy attack
+        //
+        //si combat terminer
+        //  écran victoire
+        //sinon
+        //  entity recule position initiale
     }
 
     /// <summary>
     /// Passe au prochain combattant.
     /// </summary>
-    public void NextTurn()
+    public Entity NextTurn()
     {
         if (initiativeStack.Count == 0)
         {
@@ -180,6 +233,7 @@ public class CombatManager : MonoBehaviour
 
         Entity currentCharacter = initiativeStack.Pop();
         Debug.Log($"{currentCharacter.EntityName} joue son tour !");
+        return currentCharacter;
     }
 
     /// <summary>
@@ -188,7 +242,7 @@ public class CombatManager : MonoBehaviour
     private void ResetInitiative()
     {
         // Transformer la pile en liste temporaire et réinitialiser
-        List<Entity> tempList = new List<Entity>(initiativeStack);
+        List<Entity> tempList = new List<Entity>(_entityList);
         InitializeInitiative(tempList);
     }
 
@@ -218,7 +272,7 @@ public class CombatManager : MonoBehaviour
         int nbDeath = 0;
         foreach (int index in _enemyIndexes)
         {
-            Debug.Log(index);
+            Debug.Log(_entityList[index] + " has " + _entityList[index].CurrentHP );
             if (!_entityList[index].IsAlive)
             {
                 nbDeath++;
@@ -238,6 +292,7 @@ public class CombatManager : MonoBehaviour
         int nbDeath = 0;
         foreach (int index in _allyIndexes)
         {
+            Debug.Log(_entityList[index] + " has " + _entityList[index].CurrentHP);
             if (!_entityList[index].IsAlive)
             {
                 nbDeath++;
@@ -254,7 +309,6 @@ public class CombatManager : MonoBehaviour
 
     public void OnAction()
     {
-        OnEntityMovementGo?.Invoke(_entityList[0], enemyPositions[0], enemyActionExecutionPosition);
         Debug.LogWarning("Hit");
         OnEntityMovementReturn?.Invoke(_entityList[0], enemyActionExecutionPosition, enemyPositions[0]);
     }

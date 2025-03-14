@@ -1,17 +1,16 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public abstract class Entity : MonoBehaviour
 {
     #region Variables
     [SerializeField]
     protected EntityData _entityData;
-    [SerializeField]
-    protected RaceData _raceData;
 
     protected string _entityName = "...";
 
-    protected Sprite _sprite;
+    protected GameObject _entityHead;
 
     protected JobData _job;
 
@@ -49,10 +48,9 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
-    public Sprite Sprite => _sprite;
+    public GameObject EntityHead => _entityHead;
 
     public JobData Job => _job;
-    public RaceData RaceData => _raceData;
 
     public int Level => _level;
 
@@ -78,7 +76,7 @@ public abstract class Entity : MonoBehaviour
     protected void Awake()
     {
         _d20 = new Dice(Dice.DiceType.D20);
-
+        _level = _entityData.Level;
         _entityName = _entityData.Name;
 
         UpdateStats();
@@ -87,17 +85,45 @@ public abstract class Entity : MonoBehaviour
     }
 
     /// <summary>
+    /// Roll the dices and do the math for the to hit of the character.
+    /// </summary>
+    /// <returns>Return the to hit value.</returns>
+    public int RollAttack()
+    {
+        return this._d20.ThrowDice();
+    }
+
+    /// <summary>
+    /// Roll the dices and do the math for the damage of the character.
+    /// </summary>
+    /// <returns></returns>
+    public float DamageGeneration(int indexSkillUsed)
+    {
+        float damage = 0;
+        
+        if(indexSkillUsed != -1)
+        {
+            //Add skill damage here
+        }
+
+        damage += this.Attack;
+
+        return damage;
+    }
+
+    /// <summary>
     /// Function to update the entity stats upon change.
     /// </summary>
     public void UpdateStats()
     {
-        _strength = _raceData.RaceStrength + _entityData.Strenth;
-        _dexterity = _raceData.RaceDexterity + _entityData.Dexterity;
-        _intelligence = _raceData.RaceIntelligence + _entityData.Intelligence;
-        _vitality = _raceData.RaceVitality + _entityData.Vitality;
-        _luck = _raceData.RaceLuck + _entityData.Luck;
+        _strength = _entityData.RaceData.RaceStrength + _entityData.Strenth;
+        _dexterity = _entityData.RaceData.RaceDexterity + _entityData.Dexterity;
+        _intelligence = _entityData.RaceData.RaceIntelligence + _entityData.Intelligence;
+        _vitality = _entityData.RaceData.RaceVitality + _entityData.Vitality;
+        _luck = _entityData.RaceData.RaceLuck + _entityData.Luck;
 
         _maxHP = _vitality * _level;
+        Debug.Log(_entityName + " " + _level);
     }
 
     /// <summary>
@@ -106,7 +132,19 @@ public abstract class Entity : MonoBehaviour
     /// <param name="amount">Represent the amount of damage taken. Amount will be negative if healing is given.</param>
     public void TakeDamage(int amount)
     {
-        _currentHP -= amount;
+        if (this.CurrentHP - amount >= this.MaxHP)
+        {
+            _currentHP = this.MaxHP;
+        }
+        else if(this.CurrentHP - amount >= 0)
+        { 
+            _currentHP -= amount;
+        }
+        else
+        {
+            _currentHP = 0;
+        }
+
         Debug.Log(gameObject.name + " has " + _currentHP + " left.");
     }
 

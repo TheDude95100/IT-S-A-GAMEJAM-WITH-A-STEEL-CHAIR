@@ -6902,7 +6902,7 @@ GameObject:
   - component: {fileID: 5416663315091420394}
   m_Layer: 0
   m_Name: EnemyCombat2
-  m_TagString: Untagged
+  m_TagString: Ennemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6936,7 +6936,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 3ce21642e8315a947992a8de8adb75b1, type: 2}
-  _raceData: {fileID: 11400000, guid: 2817cfbb6bffdcd4da04bc9b59ae78ba, type: 2}
 --- !u!1 &7948846542021738794
 GameObject:
   m_ObjectHideFlags: 0
