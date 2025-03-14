@@ -108,6 +108,7 @@ public abstract class Entity : MonoBehaviour
         }
 
         damage += this.Attack;
+        Debug.Log(this.EntityName + " deal " + damage);
 
         return damage;
     }
@@ -123,6 +124,8 @@ public abstract class Entity : MonoBehaviour
         _vitality = _entityData.RaceData.RaceVitality + _entityData.Vitality;
         _luck = _entityData.RaceData.RaceLuck + _entityData.Luck;
 
+        _attack = _strength;
+
         _maxHP = (_vitality * 2) + (_level * 5);
     }
 
@@ -130,7 +133,7 @@ public abstract class Entity : MonoBehaviour
     /// Function to add or remove damage from an Entity.
     /// </summary>
     /// <param name="amount">Represent the amount of damage taken. Amount will be negative if healing is given.</param>
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         if (this.CurrentHP - amount >= this.MaxHP)
         {

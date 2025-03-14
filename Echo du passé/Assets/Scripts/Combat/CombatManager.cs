@@ -203,7 +203,6 @@ public class CombatManager : MonoBehaviour
                 _isActionSelected = false;
 
                 OnEntityMovementGo?.Invoke(activeEntity, activeEntityStartPosition, allyActionExecutionPosition);
-                Debug.Log(activeEntity + " a bougé.");
                 yield return new WaitForSeconds(2);
 
                 actionChoiceHUD.SetActive(true);
@@ -212,25 +211,28 @@ public class CombatManager : MonoBehaviour
                     yield return null;
                 }
 
-                actionChoiceHUD.SetActive(false);
+                _entityList[_enemyIndexes[_selected]].TakeDamage(activeEntity.DamageGeneration(0));
 
                 OnEntityMovementReturn?.Invoke(activeEntity, allyActionExecutionPosition, activeEntityStartPosition);
-                Debug.Log(activeEntity + " est revenu.");
             }
             else
             {
                 OnEntityMovementGo?.Invoke(activeEntity, activeEntityStartPosition, enemyActionExecutionPosition);
-                Debug.Log(activeEntity + " a bougé.");
 
                 yield return new WaitForSeconds(2);
+                int randomTarget = UnityEngine.Random.Range(0, _allyIndexes.Count);
+
+                _entityList[_allyIndexes[randomTarget]].TakeDamage(activeEntity.DamageGeneration(0));
+
                 OnEntityMovementReturn?.Invoke(activeEntity, enemyActionExecutionPosition, activeEntityStartPosition);
-                Debug.Log(activeEntity + " est revenu.");
             }
+            UpdateHealthUI();
 
             yield return new WaitForSeconds(3);
             combatFinished = IsCombatDone();
         }
     }
+
     public void OnAction()
     {
         _entityList[_enemyIndexes[_selected]].Shadow.SetActive(false);
@@ -264,6 +266,7 @@ public class CombatManager : MonoBehaviour
     public void AttackSelected()
     {
         _entityList[_enemyIndexes[_selected]].Shadow.SetActive(true);
+        actionChoiceHUD.SetActive(false);
     }
 
     /// <summary>
