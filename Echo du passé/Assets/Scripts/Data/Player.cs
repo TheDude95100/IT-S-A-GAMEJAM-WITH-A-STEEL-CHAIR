@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    private int _currentXP;
-    private int _nextLevel;
+    public int _currentXP;
+    public int _nextLevel;
 
  
 }
