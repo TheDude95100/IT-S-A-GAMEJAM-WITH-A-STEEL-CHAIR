@@ -36,14 +36,16 @@ public class CombatManager : MonoBehaviour
     private int _selected, 
                 _xpGained;
 
+    private bool _isActionSelected;
+
     private Stack<Entity> initiativeStack = new Stack<Entity>();
     public event EventHandler OnInitiativeRolled;
 
     public int NumberOfCharactersInBattle => _entityList.Count;
     public int NumberOfAllyInBattle => _allyIndexes.Count;
 
-    public delegate void UpdateHealthUI(Entity target);
-    public event UpdateHealthUI OnPlayerDamageTaken;
+    public delegate void UpdatePlayerUI(Entity target);
+    public event UpdatePlayerUI OnUpdatePlayerHP;
 
     public delegate void CombatMovementGo(Entity target, Transform posStart, Transform posFinish);
     public event CombatMovementGo OnEntityMovementGo;
@@ -53,12 +55,10 @@ public class CombatManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("Awake");
         _entityList = new List<Entity>();
 
         SpawnEntities(nbAlly, allyPrefab, allyPositions);
         SpawnEntities(nbEnemy, enemyPrefab, enemyPositions);
-
     }
 
     private void Start()
@@ -156,6 +156,19 @@ public class CombatManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Update the indexes to know where the allies and the ennemies are in the list.
+    /// </summary>
+    private void UpdateHealthUI()
+    {
+        foreach(int index in _allyIndexes)
+        {
+            Debug.Log(_entityList[index].gameObject.name);
+
+            OnUpdatePlayerHP?.Invoke(_entityList[index]);
+        }
+    }
+
+    /// <summary>
     /// Lance le combat en affichant l'ordre d'initiative.
     /// </summary>
     public void StartCombat()
@@ -169,6 +182,7 @@ public class CombatManager : MonoBehaviour
             Debug.Log($"{chara.EntityName} (Initiative: {chara.Initiative})");
         }
         OnInitiativeRolled?.Invoke(this, EventArgs.Empty);
+        UpdateHealthUI();
 
         StartCoroutine(CombatLoop());
     }
@@ -182,17 +196,24 @@ public class CombatManager : MonoBehaviour
         {
             activeEntity = NextTurn();
 
-            Debug.Log(activeEntity);
             Transform activeEntityStartPosition = activeEntity.transform.parent;
 
-            //entity avance a son ini
             if(activeEntity.CompareTag("Player"))
             {
+                _isActionSelected = false;
+
                 OnEntityMovementGo?.Invoke(activeEntity, activeEntityStartPosition, allyActionExecutionPosition);
                 Debug.Log(activeEntity + " a bougé.");
-
-
                 yield return new WaitForSeconds(2);
+
+                actionChoiceHUD.SetActive(true);
+                while(!_isActionSelected)
+                {
+                    yield return null;
+                }
+
+                actionChoiceHUD.SetActive(false);
+
                 OnEntityMovementReturn?.Invoke(activeEntity, allyActionExecutionPosition, activeEntityStartPosition);
                 Debug.Log(activeEntity + " est revenu.");
             }
@@ -209,15 +230,40 @@ public class CombatManager : MonoBehaviour
             yield return new WaitForSeconds(3);
             combatFinished = IsCombatDone();
         }
-        //si ally
-        //  afficher bouton
-        //sinon
-        //  enemy attack
-        //
-        //si combat terminer
-        //  écran victoire
-        //sinon
-        //  entity recule position initiale
+    }
+    public void OnAction()
+    {
+        _entityList[_enemyIndexes[_selected]].Shadow.SetActive(false);
+        _isActionSelected = true;
+    }
+
+    public void OnSelectionRight()
+    {
+        _entityList[_enemyIndexes[_selected]].Shadow.SetActive(false);
+        _selected++;
+        if (_selected >= _enemyIndexes.Count)
+        {
+            ResetSelection();
+        }
+        _entityList[_enemyIndexes[_selected]].Shadow.SetActive(true);
+        //Debug.Log(entityList[enemyIndexes[selected]].gameObject.name + " selected");
+    }
+
+    public void OnSelectionLeft()
+    {
+        _entityList[_enemyIndexes[_selected]].Shadow.SetActive(false);
+        _selected--;
+        if (_selected < 0)
+        {
+            _selected = _enemyIndexes.Count - 1;
+        }
+        _entityList[_enemyIndexes[_selected]].Shadow.SetActive(true);
+        //Debug.Log(entityList[enemyIndexes[selected]].gameObject.name + " selected");
+    }
+
+    public void AttackSelected()
+    {
+        _entityList[_enemyIndexes[_selected]].Shadow.SetActive(true);
     }
 
     /// <summary>
@@ -305,11 +351,5 @@ public class CombatManager : MonoBehaviour
         }
 
         return false;
-    }
-
-    public void OnAction()
-    {
-        Debug.LogWarning("Hit");
-        OnEntityMovementReturn?.Invoke(_entityList[0], enemyActionExecutionPosition, enemyPositions[0]);
     }
 }
