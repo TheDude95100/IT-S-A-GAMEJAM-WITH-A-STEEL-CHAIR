@@ -12,7 +12,7 @@ public class JobDrawer : PropertyDrawer
     private PropertyDrawer _skillDrawer;
 
     private int _padding = 1;
-    private int _skillHeight = 3;
+    private int _skillHeight = 18;
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
