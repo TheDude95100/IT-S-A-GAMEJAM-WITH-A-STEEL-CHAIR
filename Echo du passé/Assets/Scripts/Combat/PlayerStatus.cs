@@ -33,7 +33,7 @@ public class PlayerStatus : MonoBehaviour
             go.transform.localPosition = new Vector3(_X_position, _Y_position + i * _Y_spacing, 0);
             go.name = "Character" + i;  // Donne un nom unique à chaque personnage
             CharacterStatus displayedStatsHolder = go.GetComponent<CharacterStatus>();
-            _combatManager.onPlayerDamageTaken += displayedStatsHolder.UpdateCharacterHP;
+            _combatManager.OnPlayerDamageTaken += displayedStatsHolder.UpdateCharacterHP;
             displayedStatsHolder.Character = _combatManager.GetAlly(i);
         }
     }

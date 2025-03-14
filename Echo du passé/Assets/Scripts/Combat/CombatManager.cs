@@ -38,7 +38,13 @@ public class CombatManager : MonoBehaviour
     public int NumberOfAllyInBattle => _allyIndexes.Count;
 
     public delegate void UpdateHealthUI(Entity target);
-    public event UpdateHealthUI onPlayerDamageTaken;
+    public event UpdateHealthUI OnPlayerDamageTaken;
+
+    public delegate void CombatMovementGo(Entity target, Transform posStart, Transform posFinish);
+    public event CombatMovementGo OnEntityMovementGo;
+
+    public delegate void CombatMovementReturn(Entity target, Transform posStart, Transform posFinish);
+    public event CombatMovementReturn OnEntityMovementReturn;
 
     private void Awake()
     {
@@ -244,5 +250,12 @@ public class CombatManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void OnAction()
+    {
+        OnEntityMovementGo?.Invoke(_entityList[0], enemyPositions[0], enemyActionExecutionPosition);
+        Debug.LogWarning("Hit");
+        OnEntityMovementReturn?.Invoke(_entityList[0], enemyActionExecutionPosition, enemyPositions[0]);
     }
 }
