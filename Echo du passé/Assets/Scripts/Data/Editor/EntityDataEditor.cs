@@ -7,7 +7,8 @@ using UnityEngine;
 public class EntityDataEditor : Editor
 {
     private SerializedProperty _entityName;
-    
+    private SerializedProperty _race;
+
     private SerializedProperty _strength;
     private SerializedProperty _dexterity;
     private SerializedProperty _intelligence;
@@ -22,6 +23,7 @@ public class EntityDataEditor : Editor
     private void OnEnable()
     {
         _entityName = serializedObject.FindProperty("_entityName");
+        _race = serializedObject.FindProperty("_raceData");
         _strength = serializedObject.FindProperty("_strength");
         _dexterity = serializedObject.FindProperty("_dexterity");
         _intelligence = serializedObject.FindProperty("_intelligence");
@@ -65,6 +67,11 @@ public class EntityDataEditor : Editor
             if (_entityName.stringValue == string.Empty)
             {
                 EditorGUILayout.HelpBox("Caution: No name specified. Please name the entity", MessageType.Warning);
+            }
+            EditorGUILayout.PropertyField(_race, new GUIContent("Race"));
+            if (_race.objectReferenceValue is null)
+            {
+                EditorGUILayout.HelpBox("Caution: No race specified. Please specify the race of the entity", MessageType.Warning);
             }
             EditorGUILayout.PropertyField(_job, new GUIContent("Job"));
 
