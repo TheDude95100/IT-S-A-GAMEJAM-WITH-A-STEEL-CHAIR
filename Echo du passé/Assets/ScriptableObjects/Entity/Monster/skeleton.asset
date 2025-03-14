@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf1cb56fe6d7214b9d74c4c37a8fa1e, type: 3}
   m_Name: skeleton
   m_EditorClassIdentifier: 
-  _showDesignerDisplay: 0
-  _entityName: ...
+  _showDesignerDisplay: 1
+  _entityName: Skeleton
   _strength: 1
   _dexterity: 1
   _intelligence: 1

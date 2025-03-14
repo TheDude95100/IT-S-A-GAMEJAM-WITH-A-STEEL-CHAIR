@@ -17,6 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Aurel/Scene/Bar.unity
     guid: 50e84a54c3483fa4bae9970d78e80dcb
+  - enabled: 1
+    path: Assets/Ben/TestCOmbat/TestSendEnemies.unity
+    guid: 2b4b97154c822c6468dc06c6fed6ae2a
+  - enabled: 1
+    path: Assets/Ben/TestCOmbat/TestGetEnemyGRoup.unity
+    guid: 2cf92f8e7689f7549929b3ead6e3c6a8
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: a255cc50968c6804290d1c186279ede7, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

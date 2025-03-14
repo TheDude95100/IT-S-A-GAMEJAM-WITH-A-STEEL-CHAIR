@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd01e713d4ecb4458083f55c2485223, type: 3}
   m_Name: Skeleton
   m_EditorClassIdentifier: 
-  _raceName: ...
+  _raceName: Skeleton
   _raceDescription: ...
   _raceStrength: 1
   _raceDexterity: 1
