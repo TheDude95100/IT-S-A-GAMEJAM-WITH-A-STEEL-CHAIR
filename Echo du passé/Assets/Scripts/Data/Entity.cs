@@ -8,9 +8,10 @@ public abstract class Entity : MonoBehaviour
     [SerializeField]
     protected EntityData _entityData;
 
-    protected string _entityName = "...";
+    [SerializeField]
+    protected GameObject _shadow;
 
-    protected GameObject _entityHead;
+    protected string _entityName = "...";
 
     protected JobData _job;
 
@@ -48,7 +49,7 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
-    public GameObject EntityHead => _entityHead;
+    public GameObject Shadow => _shadow;
 
     public JobData Job => _job;
 
@@ -122,8 +123,7 @@ public abstract class Entity : MonoBehaviour
         _vitality = _entityData.RaceData.RaceVitality + _entityData.Vitality;
         _luck = _entityData.RaceData.RaceLuck + _entityData.Luck;
 
-        _maxHP = _vitality * _level;
-        Debug.Log(_entityName + " " + _level);
+        _maxHP = (_vitality * 2) + (_level * 5);
     }
 
     /// <summary>
