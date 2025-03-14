@@ -23,6 +23,8 @@ public class TestAnimation : MonoBehaviour
                 PlayAnimation(3);
             else if (Input.GetKeyDown(KeyCode.Alpha4))
                 PlayAnimation(4);
+            else if (Input.GetKeyDown(KeyCode.Alpha5))
+                PlayAnimation(5);
         }
     }
     void PlayAnimation(int index)
@@ -40,6 +42,9 @@ public class TestAnimation : MonoBehaviour
                 break;
             case 4:
                 _animator.Play("OTHER");
+                break;
+            case 5:
+                GetComponent<PlayerFlashEffect>().Flash();
                 break;
             default:
                 _animator.Play("IDLE");
