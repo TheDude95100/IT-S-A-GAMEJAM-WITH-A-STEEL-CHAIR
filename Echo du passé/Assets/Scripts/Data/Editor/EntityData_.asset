@@ -33,16 +33,6 @@ MonoBehaviour:
       _curses: []
       _healing: 0
       _buffs: []
-    - _skillName: 
-      _skillSlot: 0
-      _description: 
-      _element: 0
-      _focus: 0
-      _damage: 0
-      _accuracy: 0
-      _curses: []
-      _healing: 0
-      _buffs: []
     _archetype: 0
   _raceData: {fileID: 0}
   _sprite: {fileID: 0}
