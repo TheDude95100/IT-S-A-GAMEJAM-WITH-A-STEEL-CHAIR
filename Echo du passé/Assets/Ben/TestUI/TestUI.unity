@@ -501,6 +501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 3743653ce4023e549851fd044a0221df, type: 2}
+  _shadow: {fileID: 0}
   _currentXP: 0
   _nextLevel: 50
 --- !u!4 &181215632
@@ -544,7 +545,7 @@ Transform:
   m_GameObject: {fileID: 293184146}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -24.4, z: 0}
+  m_LocalPosition: {x: -46.8, y: -73.2, z: 0}
   m_LocalScale: {x: 110, y: 110, z: 110}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -939,11 +940,11 @@ RectTransform:
   - {fileID: 2094358989}
   m_Father: {fileID: 130398472}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 153.9, y: 183.7}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -146.1, y: -20}
   m_SizeDelta: {x: 200, y: 20}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 1}
 --- !u!1 &475446397
 GameObject:
   m_ObjectHideFlags: 0
@@ -1558,7 +1559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 72ae1f5d434c3de47aecad6fe873d70e, type: 2}
   m_Color: {r: 0, g: 0.35827306, b: 0.4528302, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -2188,9 +2189,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -70, y: -70}
+  m_AnchoredPosition: {x: -19.99997, y: -20.000015}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 1}
 --- !u!114 &2064169586
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,6 +16,7 @@ public class ExperienceManager : MonoBehaviour
     private void Start()
     {
         expSlider.maxValue = player._nextLevel;
+        expSlider.value = player._nextLevel;
     }
 
     private void Update()
@@ -33,14 +34,14 @@ public class ExperienceManager : MonoBehaviour
         {
             LevelUp();
         }
-        expSlider.value = player._currentXP;
+        expSlider.value = player._nextLevel - player._currentXP;
     }
 
     private void LevelUp()
     {
         player._nextLevel += 20;
         expSlider.maxValue = player._nextLevel;
-        expSlider.value = 0;
+        expSlider.value = player._nextLevel;
         player._currentXP = 0;
         level++;
         textMeshProUGUILevel.text = "Level "+level;
